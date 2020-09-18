@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    line-height: 1.625;
+    color: rgba(0,0,0,.75);
+}
+img {
+    display: block;
+    width: 100%;
+}
+a, a:visited, a:active, a:hover {
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+ul, ol, li {
+    list-style: none;
+}
+input, button, textarea {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    line-height: 1em;
+    -webkit-appearance: none;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+
+.clearfix:after {
+    content: ' ';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+.text-wrap {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.text-wrap.line2 {
+    -webkit-line-clamp: 2;
+}
+
+/*-flex- start*/
+
+.flex-wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-con {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.flex-vertical {
+    -webkit-box-orient: vertical;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+}
+
+.flex-align {
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.flex-align-end {
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+.flex-justify {
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.flex-justify-sa {
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+.flex-justify-sb {
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.flex-justify-end {
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.flex-linefeed {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.fmix-v {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+}
+
+.fmix-center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.fmix-align {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.fmix-align-sa {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.fmix-align-sb {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.fmix-vertical-sb {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+}
+
+/*-flex- end*/
+
+@font-face {
+    font-family: 'iconfont';  /* project id 1037905 */
+    src: url('http://at.alicdn.com/t/font_1037905_lrf4g09onjf.eot');
+    src: url('http://at.alicdn.com/t/font_1037905_lrf4g09onjf.eot?#iefix') format('embedded-opentype'),
+    url('http://at.alicdn.com/t/font_1037905_lrf4g09onjf.woff2') format('woff2'),
+    url('http://at.alicdn.com/t/font_1037905_lrf4g09onjf.woff') format('woff'),
+    url('http://at.alicdn.com/t/font_1037905_lrf4g09onjf.ttf') format('truetype'),
+    url('http://at.alicdn.com/t/font_1037905_lrf4g09onjf.svg#iconfont') format('svg');
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 1em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.font-small {
+    font-size: 0.8em;
+}
+.font-smaller {
+    font-size: 0.6em;
+}
+.font-big {
+    font-size: 1.2em;
+}
+.font-bigger {
+    font-size: 1.4em;
+}
+.font-large {
+    font-size: 1.6em;
+}
+
+.font-theme {
+    color: #fd4a16;
+}
+.font-gray {
+    color: #9a9a9a;
+}
+.font-tmall {
+    color: #ff0036;
+}
