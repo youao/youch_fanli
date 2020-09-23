@@ -9,26 +9,6 @@ let loaded = !1;
 
 getList();
 
-function findParentNodeByClass(el, class_name) {
-    const findNode = (el, class_name) => {
-        return 'classList' in el && Array.from(el.classList).indexOf(class_name) > -1;
-    }
-    if (findNode(el, class_name)) return el;
-    const traversal = (el, class_name) => {
-        let is_find = findNode(el.parentNode, class_name);
-        let dom = is_find ? el.parentNode : false;
-        while (!dom) {
-            el = el.parentNode;
-            if (el != null && el.nodeType == el.DOCUMENT_NODE) {
-                return false;
-            }
-            traversal(el, class_name);
-        }
-        return dom;
-    }
-    return traversal(el, class_name);
-}
-
 $('.loadmore').onclick = function() {
     getList();
 };
@@ -57,11 +37,13 @@ function getData() {
         el.forEach(item => {
             item.onclick = function() {
                 const datas = this.dataset;
+                window.location.href = datas.quanUrl;
+                return;
                 if (!isWeixin()) {
                     window.location.href = datas.quanUrl;
                     return;
                 }
-                let msg = '由于微信平台规则，不支持跳转淘系链接。点击确认，帮帮您复制淘口令，打开淘宝领券购买。';
+                let msg = '由于微信平台规则，不支持跳转淘系链接。点击确认，帮您复制淘口令，打开淘宝领券购买。';
                 let isok = confirm(msg);
                 if (isok) {
                     console.log(datas.kouling);

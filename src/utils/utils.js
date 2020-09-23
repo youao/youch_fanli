@@ -7,8 +7,7 @@ export function $(selector, isAll) {
 }
 
 export function toFixed(num, len) {
-    len = len || 2;
-    let pow = Math.pow(10, len);
+    let pow = Math.pow(10, len || 2);
     return Math.floor(num * pow) / pow;
 }
 
