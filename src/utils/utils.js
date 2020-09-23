@@ -1,9 +1,9 @@
-export function $(selector) {
+export function $(selector, isAll) {
     let d = document;
     if (['html', 'root'].indexOf(selector) > -1) return d.documentElement;
     else if ('body' == selector) return d.body;
     else if ('head' == selector) return d.head;
-    return document.querySelector(selector);
+    return isAll ? document.querySelectorAll(selector) : document.querySelector(selector);
 }
 
 export function toFixed(num, len) {

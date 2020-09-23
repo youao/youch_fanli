@@ -1,5 +1,5 @@
 import data from './assets/data.json';
-import { $ } from './utils/utils.js';
+import { $, isWeixin } from './utils/utils.js';
 
 const total = data.length;
 const limit = 10;
@@ -8,34 +8,25 @@ let loading = !1;
 let loaded = !1;
 
 getList();
-$('#list').onclick = function(e) {
-    var _class = 'goods';
-    if (e.target.classList.indexOf(_class) > -1) {
-        return e.target
-    }
-};
 
 function findParentNodeByClass(el, class_name) {
-    if ('classList' in el && el.classList.indexOf(class_name) > -1) {
-        return el;
+    const findNode = (el, class_name) => {
+        return 'classList' in el && Array.from(el.classList).indexOf(class_name) > -1;
     }
-    if (el) {
-
-    }
-    var traversal = function(el, selector) {
-        doms = u.domAll(el.parentNode, selector);
-        targetDom = isSame(doms, el);
-        while (!targetDom) {
+    if (findNode(el, class_name)) return el;
+    const traversal = (el, class_name) => {
+        let is_find = findNode(el.parentNode, class_name);
+        let dom = is_find ? el.parentNode : false;
+        while (!dom) {
             el = el.parentNode;
             if (el != null && el.nodeType == el.DOCUMENT_NODE) {
                 return false;
             }
-            traversal(el, selector);
+            traversal(el, class_name);
         }
-        return targetDom;
-    };
-
-    return traversal(el, selector);
+        return dom;
+    }
+    return traversal(el, class_name);
 }
 
 $('.loadmore').onclick = function() {
@@ -61,6 +52,22 @@ function getData() {
         $('#list').insertAdjacentHTML('beforeend', listTpl(d));
         page++;
         loadStatus();
+
+        let el = $('.goods', 1);
+        el.forEach(item => {
+            item.onclick = function() {
+                const datas = this.dataset;
+                if (!isWeixin()) {
+                    window.location.href = datas.quanUrl;
+                    return;
+                }
+                let msg = '由于微信平台规则，不支持跳转淘系链接。点击确认，帮帮您复制淘口令，打开淘宝领券购买。';
+                let isok = confirm(msg);
+                if (isok) {
+                    console.log(datas.kouling);
+                }
+            }
+        });
     }, 300);
 }
 
