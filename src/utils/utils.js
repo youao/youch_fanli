@@ -11,6 +11,20 @@ export function toFixed(num, len) {
     return Math.floor(num * pow) / pow;
 }
 
+// 继承合并
+export function extend(to, from, isDeep) {
+    for (let i in from) {
+        if (from.hasOwnProperty(i)) {
+            if (isDeep && typeof from[i] == 'object') {
+                to[i] = fnExtend(from[i], to[i] || {}, isDeep);
+            } else {
+                to[i] = from[i] ? from[i] : (to[i] ? to[i] : '');
+            }
+        }
+    }
+    return to;
+}
+
 /**
  * @hyphen 键值连字符
  * @hyphenRow 数据连字符

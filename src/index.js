@@ -39,7 +39,14 @@ function getData() {
             item.onclick = function() {
                 const datas = this.dataset;
 
-                alert();
+                alert({
+                    title: '由于微信公众号规则，不支持跳转淘系链接',
+                    subtitle: '点击复制淘口令，打开淘宝领券购买。',
+                    btn: '复制淘口令'
+                }, res => {
+                    console.log(res);
+
+                });
 
 
                 // window.location.href = datas.quanUrl;

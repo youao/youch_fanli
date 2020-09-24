@@ -10,13 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "anime": "^0.1.2",
     "clipboard": "^2.0.6",
-    "raw-loader": "^4.0.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
-  "dependencies": {
-    "lodash": "^4.17.20"
-  }
+  "dependencies": {}
 }
