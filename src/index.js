@@ -1,5 +1,6 @@
 import data from './assets/data.json';
 import { $, isWeixin } from './utils/utils.js';
+import { alert } from './utils/dialog.js';
 
 const total = data.length;
 const limit = 10;
@@ -37,17 +38,21 @@ function getData() {
         el.forEach(item => {
             item.onclick = function() {
                 const datas = this.dataset;
-                window.location.href = datas.quanUrl;
-                return;
-                if (!isWeixin()) {
-                    window.location.href = datas.quanUrl;
-                    return;
-                }
-                let msg = '由于微信平台规则，不支持跳转淘系链接。点击确认，帮您复制淘口令，打开淘宝领券购买。';
-                let isok = confirm(msg);
-                if (isok) {
-                    console.log(datas.kouling);
-                }
+
+                alert();
+
+
+                // window.location.href = datas.quanUrl;
+                // return;
+                // if (!isWeixin()) {
+                //     window.location.href = datas.quanUrl;
+                //     return;
+                // }
+                // let msg = '由于微信平台规则，不支持跳转淘系链接。点击确认，帮您复制淘口令，打开淘宝领券购买。';
+                // let isok = confirm(msg);
+                // if (isok) {
+                //     console.log(datas.kouling);
+                // }
             }
         });
     }, 300);

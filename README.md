@@ -6,10 +6,10 @@ single page for youcaihua fanli
 	- frame: /
 
 	```javascript
-		"devDependencies": {
-			"webpack": "^4.44.1",
-			"webpack-cli": "^3.3.12"
-		}
+	"devDependencies": {
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12"
+	}
 	```
 	- content: 
 		1. 完成了 `rem.js`

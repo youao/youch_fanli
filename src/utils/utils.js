@@ -47,3 +47,8 @@ export function json2CssCodes() {
 export function isWeixin() {
     return navigator.userAgent.toLowerCase().match(/MicroMessenger/i)=="micromessenger";
 }
+
+
+export function time() {
+    return new Date().getTime();
+}
