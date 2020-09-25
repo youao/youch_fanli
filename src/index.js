@@ -1,6 +1,7 @@
 import data from './assets/data.json';
 import { $, isWeixin } from './utils/utils.js';
-import { alert } from './utils/dialog.js';
+import { alert, toast } from './utils/dialog.js';
+import ClipboardJS from './assets/js/clipboard.min.js';
 
 const total = data.length;
 const limit = 10;
@@ -38,28 +39,26 @@ function getData() {
         el.forEach(item => {
             item.onclick = function() {
                 const datas = this.dataset;
-
+                if (!isWeixin()) {
+                    window.location.href = datas.quanUrl;
+                    return;
+                }
+                               
                 alert({
-                    title: '由于微信公众号规则，不支持跳转淘系链接',
+                    title: '由于微信平台规则，不支持跳转淘系链接',
                     subtitle: '点击复制淘口令，打开淘宝领券购买。',
-                    btn: '复制淘口令'
+                    btn: `<span class="btn-copy" data-clipboard-text="${datas.kouling}" style="display: inline-block; width: 100%;">复制淘口令</span>`
                 }, res => {
-                    console.log(res);
-
+                    if (res.event == 'show') {
+                        var clip = new ClipboardJS('.btn-copy');
+                        clip.on('success', function(e) {
+                            toast({
+                                title: '复制成功！'
+                            });
+                            e.clearSelection();
+                        });
+                    }
                 });
-
-
-                // window.location.href = datas.quanUrl;
-                // return;
-                // if (!isWeixin()) {
-                //     window.location.href = datas.quanUrl;
-                //     return;
-                // }
-                // let msg = '由于微信平台规则，不支持跳转淘系链接。点击确认，帮您复制淘口令，打开淘宝领券购买。';
-                // let isok = confirm(msg);
-                // if (isok) {
-                //     console.log(datas.kouling);
-                // }
             }
         });
     }, 300);

@@ -6,7 +6,7 @@ function getCssCode(obj) {
 }
 
 function dialogModule(ops) {
-	var sty_dialogbox = {
+	let sty_dialogbox = {
 		'width': '100%',
 		'height': '100%',
 		'position': 'fixed',
@@ -16,7 +16,7 @@ function dialogModule(ops) {
 		'opacity': 0
 	};
 
-	var sty_mask = {
+	let sty_mask = {
 		'width': '100%',
 		'height': '100%',
 		'position': 'absolute',
@@ -26,7 +26,7 @@ function dialogModule(ops) {
 		'z-index': 1
 	};
 
-	var sty_content = {
+	let sty_content = {
 		'width': '80%',
 		'height': 'auto',
 		'position': 'absolute',
@@ -42,7 +42,7 @@ function dialogModule(ops) {
 	sty_mask = extend(sty_mask, ops.styles.mask);
 	sty_content = extend(sty_content, ops.styles.content);
 
-	var id = `dialog_${time()}`;
+	const id = `dialog_${time()}`;
 
 	return {
 		id: id,
@@ -69,7 +69,7 @@ export function close(id) {
 
 export function alert(ops, callback) {
 	ops = ops || {};
-	var sty_title = {
+	let sty_title = {
 		'font-size': '1rem',
 		'font-weight': 'bold',
 		'letter-spacing': '0.1rem',
@@ -79,14 +79,14 @@ export function alert(ops, callback) {
 		'margin-bottom': '1rem',
 	};
 
-	var sty_subtitle = {
+	let sty_subtitle = {
 		'font-size': '0.8rem',
 		'color': '#9a9a9a',
 		'line-height': '1.4',
 		'text-align': 'center',
 	};
 
-	var sty_btn = {
+	let sty_btn = {
 		'font-size': '1.2rem',
 		'color': '#fff',
 		'line-height': '1.6',
@@ -100,8 +100,8 @@ export function alert(ops, callback) {
 
 	ops.btn = ops.btn || '确认';
 
-	var subtitle = ops.subtitle ? `<div style="${getCssCode(sty_subtitle)}">${ops.subtitle}</div>` : '';
-	let content = `<div style="${getCssCode(sty_title)}">${ops.title}</div>${subtitle}
+	const subtitle = ops.subtitle ? `<div style="${getCssCode(sty_subtitle)}">${ops.subtitle}</div>` : '';
+	const content = `<div style="${getCssCode(sty_title)}">${ops.title}</div>${subtitle}
 	<div class="alert-btn" style="${getCssCode(sty_btn)}">${ops.btn}</div>`;
 
 	const obj = dialogModule({
@@ -143,5 +143,46 @@ export function alert(ops, callback) {
 		});
 		close(obj.id);
 	};
+}
 
+export function toast(ops, callback) {
+	ops = ops || {};
+
+	const content = `${ops.title}`;
+	const obj = dialogModule({
+		content: content,
+		styles: {
+			mask: {
+				background: 'transparent'
+			},
+			content: {
+				'border-radius': '0.5rem',
+				'box-sizing': 'border-box',
+				'padding': '0.5rem 1rem',
+				'width': 'auto',
+				'max-width': '60%',
+				'background': 'rgba(0,0,0,0.8)',
+				'color': '#fff',
+				'font-size': '0.9rem'
+			}
+		}
+	});
+	document.body.insertAdjacentHTML('beforeend', obj.tpl);
+
+	const toastViewShow = anime({
+		targets: '#' + obj.id,
+		opacity: 1,
+		duration: 500
+	});
+	toastViewShow.play();
+	const toastContentShow = anime({
+		targets: '#' + obj.id+' .content',
+		top: '75%',
+		duration: 500
+	});
+	toastContentShow.play();
+
+	setTimeout(() => {
+		close(obj.id);
+	}, ops.duration || 1500);
 }
