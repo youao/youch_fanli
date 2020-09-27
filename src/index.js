@@ -8,12 +8,27 @@ const limit = 10;
 let page = 1;
 let loading = !1;
 let loaded = !1;
+let is_infinity = !1;
 
-getList();
+window.onload = start();
 
-$('.loadmore').onclick = function() {
+function start() {
     getList();
-};
+    window.onscroll = function() {
+        infinity();
+    }
+}
+
+function infinity() {
+    if (!is_infinity) return;
+    let visionHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    let scrolledHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    let trueHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+    if (visionHeight + scrolledHeight == trueHeight) {
+        getList();
+    }
+}
 
 function getList() {
     if (loading || loaded) return;
@@ -28,11 +43,15 @@ function getData() {
         loading = !1;
         if (d.length == 0) {
             loaded = !0;
+            is_infinity = !1;
             loadStatus('loaded');
             return;
         }
         $('#list').insertAdjacentHTML('beforeend', listTpl(d));
         page++;
+        if (!is_infinity) {
+            is_infinity = !0;
+        }
         loadStatus();
 
         let el = $('.goods', 1);
@@ -43,7 +62,7 @@ function getData() {
                     window.location.href = datas.quanUrl;
                     return;
                 }
-                               
+
                 alert({
                     title: '由于微信平台规则，不支持跳转淘系链接',
                     subtitle: '点击复制淘口令，打开淘宝领券购买。',
